@@ -1,38 +1,146 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* ---------- GLOBAL ---------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2d2d44, #1b1b26);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.main-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 30px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* ---------- GRID ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 25px;
+}
+
+/* ---------- GLASS CARD ---------- */
+.card {
+  padding: 20px;
+  border-radius: 18px;
+}
+
+.glass {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  backdrop-filter: blur(14px);
+  transition: 0.3s ease;
+}
+
+.tilt:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.primary { background: #4a7cff; }
+.success { background: #4ed164; }
+.warning { background: #ffb84d; }
+.danger  { background: #ff4e57; }
+
+.btn:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+/* Neon button (Weather Search) */
+.neon {
+  background: #6c63ff;
+  box-shadow: 0 0 10px #8c86ff, 0 0 20px #6c63ff;
+}
+
+/* ---------- INPUTS ---------- */
+.input, .textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 10px;
+  outline: none;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 16px;
+}
+
+.small {
+  width: auto;
+  display: inline-block;
+}
+
+/* ---------- WEATHER BOX ---------- */
+.weather-box {
+  background: rgba(255,255,255,0.15);
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+/* ---------- TODO LIST ---------- */
+.todo-list, .note-list {
+  padding-left: 15px;
+}
+
+.todo-item, .note-item {
+  background: rgba(255,255,255,0.08);
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ---------- CALCULATOR ---------- */
+.screen {
+  background: rgba(0,0,0,0.3);
+  padding: 18px;
+  font-size: 24px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  text-align: right;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calc {
+  font-size: 20px;
+  padding: 18px;
+  border-radius: 10px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 28px;
   }
 }
