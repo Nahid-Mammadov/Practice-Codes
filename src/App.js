@@ -238,6 +238,7 @@
 
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import bubbleSort from "../src/Bubble";
 
 // ======================= WEATHER APP =======================
 const WeatherApp = () => {
@@ -251,7 +252,7 @@ const WeatherApp = () => {
     try {
       // 1) City → Coordinates
       const geoRes = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${city}`
+        `https://geocoding-api.open-meteo.com/v1/search?name=${city}`,
       );
       const geoData = await geoRes.json();
 
@@ -265,7 +266,7 @@ const WeatherApp = () => {
 
       // 2) Coordinates → Weather
       const weatherRes = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`,
       );
       const weatherData = await weatherRes.json();
 
@@ -383,147 +384,151 @@ const App = () => {
   const deleteNoteLS = (i) => setNotes(notes.filter((_, idx) => idx !== i));
 
   return (
-    <div className="container">
-      <h1 className="main-title">React Projects — Modern Glass UI</h1>
+    <>
+      <bubbleSort />
 
-      <div className="grid">
-        {/* WEATHER */}
-        <WeatherApp />
+      <div className="container">
+        <h1 className="main-title">React Projects — Modern Glass UI</h1>
 
-        {/* COUNTER */}
-        <div className="card glass tilt">
-          <h2>🔥 Counter</h2>
-          <h1 className="counter-value">{data1}</h1>
+        <div className="grid">
+          {/* WEATHER */}
+          <WeatherApp />
 
-          <button className="btn success" onClick={artirmaq1}>
-            +
-          </button>
-          <button className="btn danger" onClick={azaltmaq1}>
-            -
-          </button>
-        </div>
+          {/* COUNTER */}
+          <div className="card glass tilt">
+            <h2>🔥 Counter</h2>
+            <h1 className="counter-value">{data1}</h1>
 
-        {/* TODO LIST */}
-        <div className="card glass tilt wide">
-          <h2>📝 Todo List</h2>
+            <button className="btn success" onClick={artirmaq1}>
+              +
+            </button>
+            <button className="btn danger" onClick={azaltmaq1}>
+              -
+            </button>
+          </div>
 
-          <input
-            className="input"
-            placeholder="Add task..."
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-          />
+          {/* TODO LIST */}
+          <div className="card glass tilt wide">
+            <h2>📝 Todo List</h2>
 
-          <button className="btn primary" onClick={addTodo}>
-            Add
-          </button>
+            <input
+              className="input"
+              placeholder="Add task..."
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+            />
 
-          <ul className="todo-list">
-            {todos.map((todo, index) => (
-              <li key={index} className="todo-item">
-                {editIndex === index ? (
-                  <>
-                    <input
-                      className="input small"
-                      value={editTask}
-                      onChange={(e) => setEditTask(e.target.value)}
-                    />
-                    <button className="btn success small" onClick={saveEdit}>
-                      Save
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span>{todo}</span>
-                    <button
-                      className="btn warning small"
-                      onClick={() => startEdit(index)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn danger small"
-                      onClick={() => deleteTodo(index)}
-                    >
-                      Delete
-                    </button>
-                  </>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+            <button className="btn primary" onClick={addTodo}>
+              Add
+            </button>
 
-        {/* CALCULATOR */}
-        <div className="card glass tilt">
-          <h2>🧮 Calculator</h2>
-          <div className="screen">{display || "0"}</div>
+            <ul className="todo-list">
+              {todos.map((todo, index) => (
+                <li key={index} className="todo-item">
+                  {editIndex === index ? (
+                    <>
+                      <input
+                        className="input small"
+                        value={editTask}
+                        onChange={(e) => setEditTask(e.target.value)}
+                      />
+                      <button className="btn success small" onClick={saveEdit}>
+                        Save
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>{todo}</span>
+                      <button
+                        className="btn warning small"
+                        onClick={() => startEdit(index)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn danger small"
+                        onClick={() => deleteTodo(index)}
+                      >
+                        Delete
+                      </button>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <div className="calc-grid">
-            {[
-              "1",
-              "2",
-              "3",
-              "+",
-              "4",
-              "5",
-              "6",
-              "-",
-              "7",
-              "8",
-              "9",
-              "*",
-              "C",
-              "0",
-              "=",
-              "/",
-            ].map((btn, i) => (
-              <button
-                key={i}
-                className="btn calc"
-                onClick={() => {
-                  if (btn === "C") return clearDisplay();
-                  if (btn === "=") return calculate();
-                  handleClick(btn);
-                }}
-              >
-                {btn}
-              </button>
-            ))}
+          {/* CALCULATOR */}
+          <div className="card glass tilt">
+            <h2>🧮 Calculator</h2>
+            <div className="screen">{display || "0"}</div>
+
+            <div className="calc-grid">
+              {[
+                "1",
+                "2",
+                "3",
+                "+",
+                "4",
+                "5",
+                "6",
+                "-",
+                "7",
+                "8",
+                "9",
+                "*",
+                "C",
+                "0",
+                "=",
+                "/",
+              ].map((btn, i) => (
+                <button
+                  key={i}
+                  className="btn calc"
+                  onClick={() => {
+                    if (btn === "C") return clearDisplay();
+                    if (btn === "=") return calculate();
+                    handleClick(btn);
+                  }}
+                >
+                  {btn}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* NOTES */}
+          <div className="card glass tilt wide">
+            <h2>🗒 Notes</h2>
+
+            <textarea
+              className="textarea"
+              placeholder="Write note..."
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
+
+            <button className="btn primary" onClick={addNote}>
+              Add Note
+            </button>
+
+            <ul className="note-list">
+              {notes.map((n, index) => (
+                <li key={index} className="note-item">
+                  {n}
+                  <button
+                    className="btn danger small"
+                    onClick={() => deleteNoteLS(index)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        {/* NOTES */}
-        <div className="card glass tilt wide">
-          <h2>🗒 Notes</h2>
-
-          <textarea
-            className="textarea"
-            placeholder="Write note..."
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-
-          <button className="btn primary" onClick={addNote}>
-            Add Note
-          </button>
-
-          <ul className="note-list">
-            {notes.map((n, index) => (
-              <li key={index} className="note-item">
-                {n}
-                <button
-                  className="btn danger small"
-                  onClick={() => deleteNoteLS(index)}
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 
